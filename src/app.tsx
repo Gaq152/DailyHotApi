@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { config } from "./config.js";
-import { serveStatic } from "@hono/node-server/serve-static";
+import { serveStatic } from "hono/deno";
 import { compress } from "hono/compress";
 import { prettyJSON } from "hono/pretty-json";
 import { trimTrailingSlash } from "hono/trailing-slash";

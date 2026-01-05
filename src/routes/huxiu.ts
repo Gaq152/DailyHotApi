@@ -1,7 +1,7 @@
 import type { RouterData } from "../types.js";
 import type { RouterType } from "../router.types.js";
 import { getTime } from "../utils/getTime.js";
-import axios from "axios";
+import { get } from "../utils/getData.js";
 
 export const handleRoute = async (_: undefined, noCache: boolean) => {
   const listData = await getList(noCache);
@@ -19,17 +19,21 @@ export const handleRoute = async (_: undefined, noCache: boolean) => {
 const getList = async (noCache: boolean) => {
   // PC 端接口
   const url = `https://moment-api.huxiu.com/web-v3/moment/feed?platform=www`;
-  const res = await axios.get(url, {
+  const result = await get({
+    url,
+    noCache,
     headers: {
       "User-Agent": "Mozilla/5.0",
       Referer: "https://www.huxiu.com/moment/",
     },
-    timeout: 10000,
   });
-  const list: RouterType["huxiu"][] = res.data?.data?.moment_list?.datalist || [];
+
+  const data = result.data as { data?: { moment_list?: { datalist?: RouterType["huxiu"][] } } };
+  const list: RouterType["huxiu"][] = data?.data?.moment_list?.datalist || [];
+
   return {
-    fromCache: false,
-    updateTime: new Date().toISOString(),
+    fromCache: result.fromCache,
+    updateTime: result.updateTime,
     data: list.map((v: RouterType["huxiu"]) => {
       const content = (v.content || "").replace(/<br\s*\/?>/gi, "\n");
       const [titleLine, ...rest] = content

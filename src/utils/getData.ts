@@ -2,38 +2,36 @@ import type { Get, Post } from "../types.js";
 import { config } from "../config.js";
 import { getCache, setCache, delCache } from "./cache.js";
 import logger from "./logger.js";
-import axios from "axios";
 
-// 基础配置
-const request = axios.create({
-  // 请求超时设置
-  timeout: config.REQUEST_TIMEOUT,
-  withCredentials: true,
-});
+// 构建带参数的 URL
+const buildUrl = (url: string, params?: Record<string, string | number>): string => {
+  if (!params || Object.keys(params).length === 0) return url;
+  const searchParams = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {
+    searchParams.append(key, String(value));
+  }
+  const separator = url.includes("?") ? "&" : "?";
+  return `${url}${separator}${searchParams.toString()}`;
+};
 
-// 请求拦截
-request.interceptors.request.use(
-  (request) => {
-    if (!request.params) request.params = {};
-    // 发送请求
-    return request;
-  },
-  (error) => {
-    logger.error("❌ [ERROR] request failed");
-    return Promise.reject(error);
-  },
-);
-
-// 响应拦截
-request.interceptors.response.use(
-  (response) => {
+// 带超时的 fetch
+const fetchWithTimeout = async (
+  url: string,
+  options: RequestInit,
+  timeout: number
+): Promise<Response> => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
     return response;
-  },
-  (error) => {
-    // 继续传递错误
-    return Promise.reject(error);
-  },
-);
+  } finally {
+    clearTimeout(timeoutId);
+  }
+};
 
 // GET
 export const get = async (options: Get) => {
@@ -46,14 +44,15 @@ export const get = async (options: Get) => {
     originaInfo = false,
     responseType = "json",
   } = options;
-  logger.info(`🌐 [GET] ${url}`);
+  const fullUrl = buildUrl(url, params);
+  logger.info(`🌐 [GET] ${fullUrl}`);
   try {
     // 检查缓存
-    if (noCache) await delCache(url);
+    if (noCache) await delCache(fullUrl);
     else {
-      const cachedData = await getCache(url);
+      const cachedData = await getCache(fullUrl);
       if (cachedData) {
-        logger.info("💾 [CHCHE] The request is cached");
+        logger.info("💾 [CACHE] The request is cached");
         return {
           fromCache: true,
           updateTime: cachedData.updateTime,
@@ -62,14 +61,38 @@ export const get = async (options: Get) => {
       }
     }
     // 缓存不存在时请求接口
-    const response = await request.get(url, { headers, params, responseType });
-    const responseData = response?.data || response;
+    const response = await fetchWithTimeout(
+      fullUrl,
+      {
+        method: "GET",
+        headers: headers as HeadersInit,
+      },
+      config.REQUEST_TIMEOUT
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // 根据 responseType 解析响应
+    let responseData: unknown;
+    if (responseType === "arraybuffer") {
+      responseData = await response.arrayBuffer();
+    } else if (responseType === "text") {
+      responseData = await response.text();
+    } else {
+      // 默认 json
+      responseData = await response.json();
+    }
+
     // 存储新获取的数据到缓存
     const updateTime = new Date().toISOString();
-    const data = originaInfo ? response : responseData;
-    await setCache(url, { data, updateTime }, ttl);
+    const data = originaInfo
+      ? { status: response.status, headers: Object.fromEntries(response.headers), data: responseData }
+      : responseData;
+    await setCache(fullUrl, { data, updateTime }, ttl);
     // 返回数据
-    logger.info(`✅ [${response?.status}] request was successful`);
+    logger.info(`✅ [${response.status}] request was successful`);
     return { fromCache: false, updateTime, data };
   } catch (error) {
     logger.error("❌ [ERROR] request failed");
@@ -87,21 +110,45 @@ export const post = async (options: Post) => {
     else {
       const cachedData = await getCache(url);
       if (cachedData) {
-        logger.info("💾 [CHCHE] The request is cached");
+        logger.info("💾 [CACHE] The request is cached");
         return { fromCache: true, updateTime: cachedData.updateTime, data: cachedData.data };
       }
     }
     // 缓存不存在时请求接口
-    const response = await request.post(url, body, { headers });
-    const responseData = response?.data || response;
+    const requestBody = typeof body === "object" && !(body instanceof Buffer)
+      ? JSON.stringify(body)
+      : body;
+
+    const requestHeaders: Record<string, string> = { ...(headers as Record<string, string>) };
+    if (typeof body === "object" && !(body instanceof Buffer) && !requestHeaders["Content-Type"]) {
+      requestHeaders["Content-Type"] = "application/json";
+    }
+
+    const response = await fetchWithTimeout(
+      url,
+      {
+        method: "POST",
+        headers: requestHeaders,
+        body: requestBody as BodyInit,
+      },
+      config.REQUEST_TIMEOUT
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
     // 存储新获取的数据到缓存
     const updateTime = new Date().toISOString();
-    const data = originaInfo ? response : responseData;
+    const data = originaInfo
+      ? { status: response.status, headers: Object.fromEntries(response.headers), data: responseData }
+      : responseData;
     if (!noCache) {
       await setCache(url, { data, updateTime }, ttl);
     }
     // 返回数据
-    logger.info(`✅ [${response?.status}] request was successful`);
+    logger.info(`✅ [${response.status}] request was successful`);
     return { fromCache: false, updateTime, data };
   } catch (error) {
     logger.error("❌ [ERROR] request failed");

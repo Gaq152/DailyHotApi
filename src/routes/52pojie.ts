@@ -3,6 +3,7 @@ import { get } from "../utils/getData.js";
 import { getTime } from "../utils/getTime.js";
 import { parseRSS } from "../utils/parseRSS.js";
 import iconv from "iconv-lite";
+import { Buffer } from "node:buffer";
 
 const typeMap: Record<string, string> = {
   digest: "最新精华",
@@ -44,8 +45,9 @@ const getList = async (options: Options, noCache: boolean): Promise<RouterResTyp
     },
   });
 
-  // 转码
-  const utf8Data = iconv.decode(result.data, "gbk");
+  // 转码：ArrayBuffer -> Buffer -> UTF-8 string
+  const buffer = Buffer.from(result.data as ArrayBuffer);
+  const utf8Data = iconv.decode(buffer, "gbk");
   const list = await parseRSS(utf8Data);
   return {
     ...result,

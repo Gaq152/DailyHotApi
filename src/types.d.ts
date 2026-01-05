@@ -1,5 +1,7 @@
 import type { Context } from "hono";
-import type { ResponseType } from "axios";
+
+// 响应类型（替代 axios 的 ResponseType）
+export type ResponseType = "json" | "text" | "arraybuffer";
 
 // Context
 export type ListContext = Context;

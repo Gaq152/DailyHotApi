@@ -1,7 +1,5 @@
-import dotenv from "dotenv";
-
-// 环境变量
-dotenv.config();
+// Deno 原生支持 .env 文件，无需 dotenv 包
+// 使用 --allow-env 权限和 Deno.env.get() 获取环境变量
 
 export type Config = {
   PORT: number;
@@ -22,9 +20,7 @@ export type Config = {
 
 // 验证并提取环境变量
 const getEnvVariable = (key: string): string | undefined => {
-  const value = process.env[key];
-  if (value === undefined) return undefined;
-  return value;
+  return Deno.env.get(key);
 };
 
 // 将环境变量转换为数值

@@ -190,6 +190,19 @@ sh ./deploy.sh
 
 本项目支持使用 [Zeabur](https://zeabur.com/) 一键部署，请先将本项目 fork 到您的仓库中，即可使用一键部署。
 
+### Deno Deploy 部署
+
+本项目支持使用 [Deno Deploy](https://deno.com/deploy) 一键部署，具有极快的冷启动速度，且国内可直接访问。
+
+[![Deploy on Deno Deploy](https://deno.com/deno-deploy-button.svg)](https://dash.deno.com/new_project)
+
+部署步骤：
+1. Fork 本项目到您的 GitHub 仓库
+2. 点击上方按钮或访问 [Deno Deploy](https://dash.deno.com)
+3. 连接您的 GitHub 仓库
+4. 选择入口文件为 `main.ts`
+5. 点击部署即可
+
 ## ⚠️ 须知
 
 - 本项目为了避免频繁请求官方数据，默认对数据做了缓存处理，默认为 `60` 分钟，如需更改，请自行修改配置

@@ -1,0 +1,22 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-env --allow-read --watch main.ts",
+    "start": "deno run --allow-net --allow-env --allow-read main.ts"
+  },
+  "imports": {
+    "hono": "npm:hono@^4.8.9",
+    "hono/": "npm:hono@^4.8.9/",
+    "cheerio": "npm:cheerio@^1.1.2",
+    "dayjs": "npm:dayjs@^1.11.13",
+    "feed": "npm:feed@^5.1.0",
+    "md5": "npm:md5@^2.3.0",
+    "rss-parser": "npm:rss-parser@^3.13.0",
+    "user-agents": "npm:user-agents@^1.1.614",
+    "iconv-lite": "npm:iconv-lite@^0.6.3"
+  },
+  "compilerOptions": {
+    "lib": ["deno.window"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx"
+  }
+}

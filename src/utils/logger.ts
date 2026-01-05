@@ -1,81 +1,42 @@
-import { config } from "../config.js";
-import { createLogger, format, transports } from "winston";
-import path from "path";
-import chalk from "chalk";
+// Deno 兼容的简化日志模块
+// 使用控制台输出替代 winston
 
-let pathOption: (typeof transports.File)[] = [];
-
-// 日志输出目录
-if (config.USE_LOG_FILE) {
-  try {
-    pathOption = [
-      new transports.File({
-        filename: path.resolve("logs/error.log"),
-        level: "error",
-        maxsize: 1024 * 1024,
-        maxFiles: 1,
-      }),
-      new transports.File({
-        filename: path.resolve("logs/logger.log"),
-        maxsize: 1024 * 1024,
-        maxFiles: 1,
-      }),
-    ];
-  } catch (error) {
-    console.error("Failed to initialize log files. Logging to a file will be skipped.", error);
-    pathOption = [];
-  }
-}
-
-// 定义不同日志级别的彩色块
-const levelColors: { [key: string]: string } = {
-  error: chalk.bgRed(" ERROR "),
-  warn: chalk.bgYellow(" WARN "),
-  info: chalk.bgBlue(" INFO "),
-  debug: chalk.bgGreen(" DEBUG "),
-  default: chalk.bgWhite(" LOG "),
+// 获取当前时间戳
+const getTimestamp = (): string => {
+  const now = new Date();
+  return now.toISOString().replace('T', ' ').substring(0, 19);
 };
 
-// 自定义控制台日志输出格式
-const consoleFormat = format.printf(({ level, message, timestamp, stack }) => {
-  // 获取原始日志级别
-  const originalLevel = Object.keys(levelColors).find((lvl) => level.includes(lvl)) || "default";
-  const colorLevel = levelColors[originalLevel] || levelColors.default;
+// 日志级别颜色（使用 ANSI 转义码）
+const colors = {
+  reset: "\x1b[0m",
+  red: "\x1b[41m\x1b[37m",     // 红底白字
+  yellow: "\x1b[43m\x1b[30m",  // 黄底黑字
+  blue: "\x1b[44m\x1b[37m",    // 蓝底白字
+  green: "\x1b[42m\x1b[30m",   // 绿底黑字
+};
 
-  let logMessage = `${colorLevel} [${timestamp}] ${message}`;
-  if (stack) {
-    logMessage += `\n${stack}`;
-  }
-  return logMessage;
-});
-
-// logger
-const logger = createLogger({
-  // 最低的日志级别
-  level: "info",
-  // 定义日志的格式
-  format: format.combine(
-    format.timestamp({
-      format: "YYYY-MM-DD HH:mm:ss",
-    }),
-    format.errors({ stack: true }),
-    format.splat(),
-    format.json(),
-  ),
-  transports: pathOption,
-});
-
-// 控制台输出
-if (process.env.NODE_ENV !== "production") {
-  try {
-    logger.add(
-      new transports.Console({
-        format: format.combine(format.colorize(), consoleFormat),
-      }),
-    );
-  } catch (error) {
-    console.error("Failed to add console transport. Console logging will be skipped.", error);
-  }
+// 日志接口
+interface Logger {
+  info: (message: string) => void;
+  warn: (message: string) => void;
+  error: (message: string) => void;
+  debug: (message: string) => void;
 }
+
+const logger: Logger = {
+  info: (message: string) => {
+    console.log(`${colors.blue} INFO ${colors.reset} [${getTimestamp()}] ${message}`);
+  },
+  warn: (message: string) => {
+    console.warn(`${colors.yellow} WARN ${colors.reset} [${getTimestamp()}] ${message}`);
+  },
+  error: (message: string) => {
+    console.error(`${colors.red} ERROR ${colors.reset} [${getTimestamp()}] ${message}`);
+  },
+  debug: (message: string) => {
+    console.log(`${colors.green} DEBUG ${colors.reset} [${getTimestamp()}] ${message}`);
+  },
+};
 
 export default logger;

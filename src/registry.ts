@@ -1,64 +1,140 @@
-import { fileURLToPath } from "url";
 import { config } from "./config.js";
 import { Hono } from "hono";
 import getRSS from "./utils/getRSS.js";
-import path from "path";
-import fs from "fs";
+
+// 静态导入所有路由
+import * as route36kr from "./routes/36kr.js";
+import * as route51cto from "./routes/51cto.js";
+import * as route52pojie from "./routes/52pojie.js";
+import * as routeAcfun from "./routes/acfun.js";
+import * as routeBaidu from "./routes/baidu.js";
+import * as routeBilibili from "./routes/bilibili.js";
+import * as routeCoolapk from "./routes/coolapk.js";
+import * as routeCsdn from "./routes/csdn.js";
+import * as routeDgtle from "./routes/dgtle.js";
+import * as routeDoubanGroup from "./routes/douban-group.js";
+import * as routeDoubanMovie from "./routes/douban-movie.js";
+import * as routeDouyin from "./routes/douyin.js";
+import * as routeEarthquake from "./routes/earthquake.js";
+import * as routeGameres from "./routes/gameres.js";
+import * as routeGeekpark from "./routes/geekpark.js";
+import * as routeGenshin from "./routes/genshin.js";
+import * as routeGithub from "./routes/github.js";
+import * as routeGuokr from "./routes/guokr.js";
+import * as routeHackernews from "./routes/hackernews.js";
+import * as routeHellogithub from "./routes/hellogithub.js";
+import * as routeHistory from "./routes/history.js";
+import * as routeHonkai from "./routes/honkai.js";
+import * as routeHostloc from "./routes/hostloc.js";
+import * as routeHupu from "./routes/hupu.js";
+import * as routeHuxiu from "./routes/huxiu.js";
+import * as routeIfanr from "./routes/ifanr.js";
+import * as routeIthomeXijiayi from "./routes/ithome-xijiayi.js";
+import * as routeIthome from "./routes/ithome.js";
+import * as routeJianshu from "./routes/jianshu.js";
+import * as routeJuejin from "./routes/juejin.js";
+import * as routeKuaishou from "./routes/kuaishou.js";
+import * as routeLinuxdo from "./routes/linuxdo.js";
+import * as routeLol from "./routes/lol.js";
+import * as routeMiyoushe from "./routes/miyoushe.js";
+import * as routeNeteaseNews from "./routes/netease-news.js";
+import * as routeNewsmth from "./routes/newsmth.js";
+import * as routeNgabbs from "./routes/ngabbs.js";
+import * as routeNodeseek from "./routes/nodeseek.js";
+import * as routeNytimes from "./routes/nytimes.js";
+import * as routeProducthunt from "./routes/producthunt.js";
+import * as routeQqNews from "./routes/qq-news.js";
+import * as routeSinaNews from "./routes/sina-news.js";
+import * as routeSina from "./routes/sina.js";
+import * as routeSmzdm from "./routes/smzdm.js";
+import * as routeSspai from "./routes/sspai.js";
+import * as routeStarrail from "./routes/starrail.js";
+import * as routeThepaper from "./routes/thepaper.js";
+import * as routeTieba from "./routes/tieba.js";
+import * as routeToutiao from "./routes/toutiao.js";
+import * as routeV2ex from "./routes/v2ex.js";
+import * as routeWeatheralarm from "./routes/weatheralarm.js";
+import * as routeWeibo from "./routes/weibo.js";
+import * as routeWeread from "./routes/weread.js";
+import * as routeYystv from "./routes/yystv.js";
+import * as routeZhihuDaily from "./routes/zhihu-daily.js";
+import * as routeZhihu from "./routes/zhihu.js";
 
 const app = new Hono();
 
-// 模拟 __dirname
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// 路由映射表
+const routeMap: Record<string, { handleRoute: (c: unknown, noCache: boolean) => Promise<unknown> }> = {
+  "36kr": route36kr,
+  "51cto": route51cto,
+  "52pojie": route52pojie,
+  "acfun": routeAcfun,
+  "baidu": routeBaidu,
+  "bilibili": routeBilibili,
+  "coolapk": routeCoolapk,
+  "csdn": routeCsdn,
+  "dgtle": routeDgtle,
+  "douban-group": routeDoubanGroup,
+  "douban-movie": routeDoubanMovie,
+  "douyin": routeDouyin,
+  "earthquake": routeEarthquake,
+  "gameres": routeGameres,
+  "geekpark": routeGeekpark,
+  "genshin": routeGenshin,
+  "github": routeGithub,
+  "guokr": routeGuokr,
+  "hackernews": routeHackernews,
+  "hellogithub": routeHellogithub,
+  "history": routeHistory,
+  "honkai": routeHonkai,
+  "hostloc": routeHostloc,
+  "hupu": routeHupu,
+  "huxiu": routeHuxiu,
+  "ifanr": routeIfanr,
+  "ithome-xijiayi": routeIthomeXijiayi,
+  "ithome": routeIthome,
+  "jianshu": routeJianshu,
+  "juejin": routeJuejin,
+  "kuaishou": routeKuaishou,
+  "linuxdo": routeLinuxdo,
+  "lol": routeLol,
+  "miyoushe": routeMiyoushe,
+  "netease-news": routeNeteaseNews,
+  "newsmth": routeNewsmth,
+  "ngabbs": routeNgabbs,
+  "nodeseek": routeNodeseek,
+  "nytimes": routeNytimes,
+  "producthunt": routeProducthunt,
+  "qq-news": routeQqNews,
+  "sina-news": routeSinaNews,
+  "sina": routeSina,
+  "smzdm": routeSmzdm,
+  "sspai": routeSspai,
+  "starrail": routeStarrail,
+  "thepaper": routeThepaper,
+  "tieba": routeTieba,
+  "toutiao": routeToutiao,
+  "v2ex": routeV2ex,
+  "weatheralarm": routeWeatheralarm,
+  "weibo": routeWeibo,
+  "weread": routeWeread,
+  "yystv": routeYystv,
+  "zhihu-daily": routeZhihuDaily,
+  "zhihu": routeZhihu,
+};
 
-// 路由数据
-let allRoutePath: Array<string> = [];
-const routersDirName: string = "routes";
+// 路由名称列表
+const allRoutePath = Object.keys(routeMap);
 
 // 排除路由
 const excludeRoutes: Array<string> = [];
 
-// 建立完整目录路径
-const routersDirPath = path.join(__dirname, routersDirName);
-
-// 递归查找函数
-const findTsFiles = (dirPath: string, allFiles: string[] = [], basePath: string = ""): string[] => {
-  // 读取目录下的所有文件和文件夹
-  const items: Array<string> = fs.readdirSync(dirPath);
-  // 遍历每个文件或文件夹
-  items.forEach((item) => {
-    const fullPath: string = path.join(dirPath, item);
-    const relativePath: string = basePath ? path.posix.join(basePath, item) : item;
-    const stat: fs.Stats = fs.statSync(fullPath);
-    if (stat.isDirectory()) {
-      // 如果是文件夹，递归查找
-      findTsFiles(fullPath, allFiles, relativePath);
-    } else if (
-      stat.isFile() &&
-      (item.endsWith(".ts") || item.endsWith(".js")) &&
-      !item.endsWith(".d.ts")
-    ) {
-      // 符合条件
-      allFiles.push(relativePath.replace(/\.(ts|js)$/, ""));
-    }
-  });
-  return allFiles;
-};
-
-// 获取全部路由
-if (fs.existsSync(routersDirPath) && fs.statSync(routersDirPath).isDirectory()) {
-  allRoutePath = findTsFiles(routersDirPath);
-} else {
-  console.error(`📂 The directory ${routersDirPath} does not exist or is not a directory`);
-}
-
 // 注册全部路由
-for (let index = 0; index < allRoutePath.length; index++) {
-  const router = allRoutePath[index];
+for (const routeName of allRoutePath) {
   // 是否处于排除名单
-  if (excludeRoutes.includes(router)) {
+  if (excludeRoutes.includes(routeName)) {
     continue;
   }
-  const listApp = app.basePath(`/${router}`);
+  const listApp = app.basePath(`/${routeName}`);
   // 返回榜单
   listApp.get("/", async (c) => {
     // 是否采用缓存
@@ -67,11 +143,11 @@ for (let index = 0; index < allRoutePath.length; index++) {
     const limit = c.req.query("limit");
     // 是否输出 RSS
     const rssEnabled = c.req.query("rss") === "true";
-    // 获取路由路径
-    const { handleRoute } = await import(`./routes/${router}.js`);
-    const listData = await handleRoute(c, noCache);
+    // 获取路由处理函数
+    const { handleRoute } = routeMap[routeName];
+    const listData = await handleRoute(c, noCache) as { data?: unknown[]; total?: number };
     // 是否限制条目
-    if (limit && listData?.data?.length > parseInt(limit)) {
+    if (limit && listData?.data?.length && listData.data.length > parseInt(limit)) {
       listData.total = parseInt(limit);
       listData.data = listData.data.slice(0, parseInt(limit));
     }
