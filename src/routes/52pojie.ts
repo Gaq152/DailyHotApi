@@ -1,7 +1,7 @@
-import type { RouterData, ListContext, Options, RouterResType } from "../types.js";
-import { get } from "../utils/getData.js";
-import { getTime } from "../utils/getTime.js";
-import { parseRSS } from "../utils/parseRSS.js";
+import type { RouterData, ListContext, Options, RouterResType } from "../types.d.ts";
+import { get } from "../utils/getData.ts";
+import { getTime } from "../utils/getTime.ts";
+import { parseRSS } from "../utils/parseRSS.ts";
 import iconv from "iconv-lite";
 import { Buffer } from "node:buffer";
 

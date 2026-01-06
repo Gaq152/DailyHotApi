@@ -1,7 +1,7 @@
-import type { RouterData, ListContext, Options } from "../types.js";
-import type { RouterType } from "../router.types.js";
-import { parseChineseNumber } from "../utils/getNum.js";
-import { get } from "../utils/getData.js";
+import type { RouterData, ListContext, Options } from "../types.d.ts";
+import type { RouterType } from "../router.types.d.ts";
+import { parseChineseNumber } from "../utils/getNum.ts";
+import { get } from "../utils/getData.ts";
 
 const typeMap: Record<string, string> = {
   all: "新浪热榜",

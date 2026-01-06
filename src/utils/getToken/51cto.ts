@@ -1,5 +1,5 @@
-import { getCache, setCache } from "../cache.js";
-import { get } from "../getData.js";
+import { getCache, setCache } from "../cache.ts";
+import { get } from "../getData.ts";
 import md5 from "md5";
 
 export const getToken = async () => {

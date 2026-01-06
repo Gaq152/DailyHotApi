@@ -1,7 +1,7 @@
-import type { RouterData } from "../types.js";
-import type { RouterType } from "../router.types.js";
-import { get } from "../utils/getData.js";
-import { genHeaders } from "../utils/getToken/coolapk.js";
+import type { RouterData } from "../types.d.ts";
+import type { RouterType } from "../router.types.d.ts";
+import { get } from "../utils/getData.ts";
+import { genHeaders } from "../utils/getToken/coolapk.ts";
 
 export const handleRoute = async (_: undefined, noCache: boolean) => {
   const listData = await getList(noCache);

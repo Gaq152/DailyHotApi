@@ -1,8 +1,8 @@
-import type { RouterData, RouterResType } from "../types.js";
-import type { RouterType } from "../router.types.js";
-import { getToken, sign } from "../utils/getToken/51cto.js";
-import { get } from "../utils/getData.js";
-import { getTime } from "../utils/getTime.js";
+import type { RouterData, RouterResType } from "../types.d.ts";
+import type { RouterType } from "../router.types.d.ts";
+import { getToken, sign } from "../utils/getToken/51cto.ts";
+import { get } from "../utils/getData.ts";
+import { getTime } from "../utils/getTime.ts";
 
 export const handleRoute = async (_: undefined, noCache: boolean) => {
   const listData = await getList(noCache);

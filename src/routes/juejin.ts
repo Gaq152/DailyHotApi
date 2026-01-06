@@ -1,6 +1,6 @@
-import type { ListContext, RouterData } from "../types.js";
-import type { RouterType } from "../router.types.js";
-import { get } from "../utils/getData.js";
+import type { ListContext, RouterData } from "../types.d.ts";
+import type { RouterType } from "../router.types.d.ts";
+import { get } from "../utils/getData.ts";
 
 
 const headers =  {

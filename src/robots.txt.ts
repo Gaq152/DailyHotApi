@@ -1,5 +1,5 @@
 import type { Handler } from "hono";
-import { config } from "./config.js";
+import { config } from "./config.ts";
 
 const handler: Handler = (c) => {
   if (config.DISALLOW_ROBOT) {

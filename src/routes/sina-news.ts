@@ -1,7 +1,7 @@
-import type { RouterData, ListContext, Options } from "../types.js";
-import type { RouterType } from "../router.types.js";
-import { getTime, getCurrentDateTime } from "../utils/getTime.js";
-import { get } from "../utils/getData.js";
+import type { RouterData, ListContext, Options } from "../types.d.ts";
+import type { RouterType } from "../router.types.d.ts";
+import { getTime, getCurrentDateTime } from "../utils/getTime.ts";
+import { get } from "../utils/getData.ts";
 
 // 榜单类别
 const listType = {

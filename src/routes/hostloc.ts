@@ -1,7 +1,7 @@
-import type { RouterData, ListContext, Options } from "../types.js";
-import { get } from "../utils/getData.js";
-import { parseRSS } from "../utils/parseRSS.js";
-import { getTime } from "../utils/getTime.js";
+import type { RouterData, ListContext, Options } from "../types.d.ts";
+import { get } from "../utils/getData.ts";
+import { parseRSS } from "../utils/parseRSS.ts";
+import { getTime } from "../utils/getTime.ts";
 
 const typeMap: Record<string, string> = {
   hot: "最新热门",

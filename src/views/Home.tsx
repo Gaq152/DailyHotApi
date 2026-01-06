@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 import { html } from "hono/html";
-import Layout from "./Layout.js";
+import Layout from "./Layout.ts";
 
 const Home: FC = () => {
   return (

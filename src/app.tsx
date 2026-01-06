@@ -1,16 +1,16 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { config } from "./config.js";
+import { config } from "./config.ts";
 import { serveStatic } from "hono/deno";
 import { compress } from "hono/compress";
 import { prettyJSON } from "hono/pretty-json";
 import { trimTrailingSlash } from "hono/trailing-slash";
-import logger from "./utils/logger.js";
-import registry from "./registry.js";
-import robotstxt from "./robots.txt.js";
-import NotFound from "./views/NotFound.js";
-import Home from "./views/Home.js";
-import Error from "./views/Error.js";
+import logger from "./utils/logger.ts";
+import registry from "./registry.ts";
+import robotstxt from "./robots.txt.ts";
+import NotFound from "./views/NotFound.ts";
+import Home from "./views/Home.ts";
+import Error from "./views/Error.ts";
 
 const app = new Hono();
 

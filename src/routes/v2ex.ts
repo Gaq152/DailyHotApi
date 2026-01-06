@@ -1,6 +1,6 @@
-import type { RouterData, ListContext, Options } from "../types.js";
-import type { RouterType } from "../router.types.js";
-import { get } from "../utils/getData.js";
+import type { RouterData, ListContext, Options } from "../types.d.ts";
+import type { RouterType } from "../router.types.d.ts";
+import { get } from "../utils/getData.ts";
 
 export const handleRoute = async (c: ListContext, noCache: boolean) => {
   const type = c.req.query("type") || "hot";

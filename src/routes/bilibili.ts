@@ -1,9 +1,9 @@
-import type { RouterData, ListContext, Options, RouterResType } from "../types.js";
-import type { RouterType } from "../router.types.js";
-import { get } from "../utils/getData.js";
-import getBiliWbi from "../utils/getToken/bilibili.js";
-import { getTime } from "../utils/getTime.js";
-import logger from "../utils/logger.js";
+import type { RouterData, ListContext, Options, RouterResType } from "../types.d.ts";
+import type { RouterType } from "../router.types.d.ts";
+import { get } from "../utils/getData.ts";
+import getBiliWbi from "../utils/getToken/bilibili.ts";
+import { getTime } from "../utils/getTime.ts";
+import logger from "../utils/logger.ts";
 const typeMap: Record<string, string> = {
   "0": "全站",
   "1": "动画",

@@ -1,6 +1,6 @@
-import type { RouterData, ListItem } from "../types.ts";
+import type { RouterData, ListItem } from "../types.d.ts";
 import { Feed } from "feed";
-import logger from "./logger.js";
+import logger from "./logger.ts";
 
 // 生成 RSS
 const getRSS = (data: RouterData) => {

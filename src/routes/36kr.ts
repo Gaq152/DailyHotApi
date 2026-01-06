@@ -1,7 +1,7 @@
-import type { RouterData, ListContext, Options, RouterResType } from "../types.js";
-import type { RouterType } from "../router.types.js";
-import { post } from "../utils/getData.js";
-import { getTime } from "../utils/getTime.js";
+import type { RouterData, ListContext, Options, RouterResType } from "../types.d.ts";
+import type { RouterType } from "../router.types.d.ts";
+import { post } from "../utils/getData.ts";
+import { getTime } from "../utils/getTime.ts";
 
 const typeMap: Record<string, string> = {
   hot: "人气榜",

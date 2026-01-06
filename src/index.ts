@@ -1,7 +1,7 @@
 import { serve } from "@hono/node-server";
-import { config } from "./config.js";
-import logger from "./utils/logger.js";
-import app from "./app.js";
+import { config } from "./config.ts";
+import logger from "./utils/logger.ts";
+import app from "./app.ts";
 
 // 启动服务器
 const serveHotApi: (port?: number) => void = (port: number = config.PORT) => {

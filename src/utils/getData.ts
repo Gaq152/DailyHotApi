@@ -1,7 +1,7 @@
-import type { Get, Post } from "../types.js";
-import { config } from "../config.js";
-import { getCache, setCache, delCache } from "./cache.js";
-import logger from "./logger.js";
+import type { Get, Post } from "../types.d.ts";
+import { config } from "../config.ts";
+import { getCache, setCache, delCache } from "./cache.ts";
+import logger from "./logger.ts";
 
 // 构建带参数的 URL
 const buildUrl = (url: string, params?: Record<string, string | number>): string => {

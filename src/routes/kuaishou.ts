@@ -1,7 +1,7 @@
-import type { RouterType } from "../router.types.js";
-import type { ListItem, RouterData } from "../types.js";
-import { get } from "../utils/getData.js";
-import { parseChineseNumber } from "../utils/getNum.js";
+import type { RouterType } from "../router.types.d.ts";
+import type { ListItem, RouterData } from "../types.d.ts";
+import { get } from "../utils/getData.ts";
+import { parseChineseNumber } from "../utils/getNum.ts";
 import UserAgent from "user-agents";
 
 const APOLLO_STATE_PREFIX = "window.__APOLLO_STATE__=";

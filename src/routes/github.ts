@@ -2,8 +2,8 @@
 import fetch from "node-fetch";
 import * as cheerio from "cheerio";
 import { ListContext } from "../types";
-import logger from "../utils/logger.js";
-import {  getCache, setCache } from "../utils/cache.js";
+import logger from "../utils/logger.ts";
+import {  getCache, setCache } from "../utils/cache.ts";
 
 /**
  * 定义 Trending 仓库信息的类型

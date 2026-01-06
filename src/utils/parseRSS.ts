@@ -1,5 +1,5 @@
 import RSSParser from "rss-parser";
-import logger from "./logger.js";
+import logger from "./logger.ts";
 
 /**
  * 提取 RSS 内容

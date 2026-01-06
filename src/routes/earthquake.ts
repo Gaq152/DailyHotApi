@@ -1,7 +1,7 @@
-import type { RouterData } from "../types.js";
-import type { RouterType } from "../router.types.js";
-import { get } from "../utils/getData.js";
-import { getTime } from "../utils/getTime.js";
+import type { RouterData } from "../types.d.ts";
+import type { RouterType } from "../router.types.d.ts";
+import { get } from "../utils/getData.ts";
+import { getTime } from "../utils/getTime.ts";
 
 const mappings: Record<string, string> = {
   O_TIME: "发震时刻(UTC+8)",
