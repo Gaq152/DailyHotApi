@@ -18,7 +18,7 @@ export const handleRoute = async (_: undefined, noCache: boolean) => {
 
 const getList = async (noCache: boolean) => {
   const url = `https://m.163.com/fe/api/hot/news/flow`;
-  const result = await get({ url, noCache });
+  const result = await get({ url, noCache, responseType: "json" });
   const list = result.data.data.list;
   return {
     ...result,
