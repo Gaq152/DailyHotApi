@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import crypto from "crypto";
+import crypto from "node:crypto";
 
 /**
  * 获取微信读书的书籍 ID

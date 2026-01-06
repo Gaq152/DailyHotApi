@@ -19,5 +19,9 @@
     "lib": ["deno.window"],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx"
+  },
+  "deploy": {
+    "org": "gaq152",
+    "app": "dailyhotapi-deno"
   }
 }
