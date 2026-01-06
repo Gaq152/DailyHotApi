@@ -3,18 +3,15 @@
 <h2>今日热榜</h2>
 <p>一个聚合热门数据的 API 接口</p>
 <br />
-<img src="https://img.shields.io/github/last-commit/imsyy/DailyHotApi" alt="last commit"/>
- <img src="https://img.shields.io/github/languages/code-size/imsyy/DailyHotApi" alt="code size"/>
- <img src="https://img.shields.io/docker/image-size/imsyy/dailyhot-api" alt="docker-image-size"/>
-<img src="https://github.com/imsyy/DailyHotApi/actions/workflows/docker.yml/badge.svg" alt="Publish Docker image"/>
-<img src="https://github.com/imsyy/DailyHotApi/actions/workflows/npm.yml/badge.svg" alt="Publish npm package"/>
+<img src="https://img.shields.io/github/last-commit/Gaq152/DailyHotApi" alt="last commit"/>
+<img src="https://img.shields.io/github/languages/code-size/Gaq152/DailyHotApi" alt="code size"/>
 </div>
 
 ## 🚩 特性
 
 - 极快响应，便于开发
 - 支持 RSS 模式和 JSON 模式
-- 支持多种部署方式
+- Deno Deploy 一键部署
 - 简明的路由目录，便于新增
 
 ## 👀 示例
@@ -34,176 +31,85 @@
 
 | **站点**         | **类别**     | **调用名称**   | **状态**                                                                                                                                                            |
 | ---------------- | ------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 哔哩哔哩         | 热门榜       | bilibili       | ![https://api-hot.imsyy.top/bilibili](https://img.shields.io/website.svg?label=bilibili&url=https://api-hot.imsyy.top/bilibili&cacheSeconds=7200)                   |
-| AcFun            | 排行榜       | acfun          | ![https://api-hot.imsyy.top/acfun](https://img.shields.io/website.svg?label=acfun&url=https://api-hot.imsyy.top/acfun&cacheSeconds=7200)                            |
-| 微博             | 热搜榜       | weibo          | ![https://api-hot.imsyy.top/weibo](https://img.shields.io/website.svg?label=weibo&url=https://api-hot.imsyy.top/weibo&cacheSeconds=7200)                            |
-| 知乎             | 热榜         | zhihu          | ![https://api-hot.imsyy.top/zhihu](https://img.shields.io/website.svg?label=zhihu&url=https://api-hot.imsyy.top/zhihu&cacheSeconds=7200)                            |
-| 知乎日报         | 推荐榜       | zhihu-daily    | ![https://api-hot.imsyy.top/zhihu-daily](https://img.shields.io/website.svg?label=zhihu-daily&url=https://api-hot.imsyy.top/zhihu-daily&cacheSeconds=7200)          |
-| 百度             | 热搜榜       | baidu          | ![https://api-hot.imsyy.top/baidu](https://img.shields.io/website.svg?label=baidu&url=https://api-hot.imsyy.top/baidu&cacheSeconds=7200)                            |
-| 抖音             | 热点榜       | douyin         | ![https://api-hot.imsyy.top/douyin](https://img.shields.io/website.svg?label=douyin&url=https://api-hot.imsyy.top/douyin&cacheSeconds=7200)                         |
-| 快手             | 热点榜       | kuaishou       | ![https://api-hot.imsyy.top/kuaishou](https://img.shields.io/website.svg?label=kuaishou&url=https://api-hot.imsyy.top/kuaishou&cacheSeconds=7200)                   |
-| 豆瓣电影         | 新片榜       | douban-movie   | ![https://api-hot.imsyy.top/douban-movie](https://img.shields.io/website.svg?label=douban-movie&url=https://api-hot.imsyy.top/douban-movie&cacheSeconds=7200)       |
-| 豆瓣讨论小组     | 讨论精选     | douban-group   | ![https://api-hot.imsyy.top/douban-group](https://img.shields.io/website.svg?label=douban-group&url=https://api-hot.imsyy.top/douban-group&cacheSeconds=7200)       |
-| 百度贴吧         | 热议榜       | tieba          | ![https://api-hot.imsyy.top/tieba](https://img.shields.io/website.svg?label=tieba&url=https://api-hot.imsyy.top/tieba&cacheSeconds=7200)                            |
-| 少数派           | 热榜         | sspai          | ![https://api-hot.imsyy.top/sspai](https://img.shields.io/website.svg?label=sspai&url=https://api-hot.imsyy.top/sspai&cacheSeconds=7200)                            |
-| IT之家           | 热榜         | ithome         | ![https://api-hot.imsyy.top/ithome](https://img.shields.io/website.svg?label=ithome&url=https://api-hot.imsyy.top/ithome&cacheSeconds=7200)                         |
-| IT之家「喜加一」 | 最新动态     | ithome-xijiayi | ![https://api-hot.imsyy.top/ithome-xijiayi](https://img.shields.io/website.svg?label=ithome-xijiayi&url=https://api-hot.imsyy.top/ithome-xijiayi&cacheSeconds=7200) |
-| 简书             | 热门推荐     | jianshu        | ![https://api-hot.imsyy.top/jianshu](https://img.shields.io/website.svg?label=jianshu&url=https://api-hot.imsyy.top/jianshu&cacheSeconds=7200)                      |
-| 果壳             | 热门文章     | guokr          | ![https://api-hot.imsyy.top/guokr](https://img.shields.io/website.svg?label=guokr&url=https://api-hot.imsyy.top/guokr&cacheSeconds=7200)                            |
-| 澎湃新闻         | 热榜         | thepaper       | ![https://api-hot.imsyy.top/thepaper](https://img.shields.io/website.svg?label=thepaper&url=https://api-hot.imsyy.top/thepaper&cacheSeconds=7200)                   |
-| 今日头条         | 热榜         | toutiao        | ![https://api-hot.imsyy.top/toutiao](https://img.shields.io/website.svg?label=toutiao&url=https://api-hot.imsyy.top/toutiao&cacheSeconds=7200)                      |
-| 36 氪            | 热榜         | 36kr           | ![https://api-hot.imsyy.top/36kr](https://img.shields.io/website.svg?label=36kr&url=https://api-hot.imsyy.top/36kr&cacheSeconds=7200)                               |
-| 51CTO            | 推荐榜       | 51cto          | ![https://api-hot.imsyy.top/51cto](https://img.shields.io/website.svg?label=51cto&url=https://api-hot.imsyy.top/51cto&cacheSeconds=7200)                            |
-| CSDN             | 排行榜       | csdn           | ![https://api-hot.imsyy.top/csdn](https://img.shields.io/website.svg?label=csdn&url=https://api-hot.imsyy.top/csdn&cacheSeconds=7200)                               |
-| NodeSeek         | 最新动态     | nodeseek       | ![https://api-hot.imsyy.top/nodeseek](https://img.shields.io/website.svg?label=nodeseek&url=https://api-hot.imsyy.top/nodeseek&cacheSeconds=7200)                   |
-| 稀土掘金         | 热榜         | juejin         | ![https://api-hot.imsyy.top/juejin](https://img.shields.io/website.svg?label=juejin&url=https://api-hot.imsyy.top/juejin&cacheSeconds=7200)                         |
-| 腾讯新闻         | 热点榜       | qq-news        | ![https://api-hot.imsyy.top/qq-news](https://img.shields.io/website.svg?label=qq-news&url=https://api-hot.imsyy.top/qq-news&cacheSeconds=7200)                      |
-| 新浪网           | 热榜         | sina           | ![https://api-hot.imsyy.top/sina](https://img.shields.io/website.svg?label=sina&url=https://api-hot.imsyy.top/sina&cacheSeconds=7200)                               |
-| 新浪新闻         | 热点榜       | sina-news      | ![https://api-hot.imsyy.top/sina-news](https://img.shields.io/website.svg?label=sina-news&url=https://api-hot.imsyy.top/sina-news&cacheSeconds=7200)                |
-| 网易新闻         | 热点榜       | netease-news   | ![https://api-hot.imsyy.top/netease-news](https://img.shields.io/website.svg?label=netease-news&url=https://api-hot.imsyy.top/netease-news&cacheSeconds=7200)       |
-| 吾爱破解         | 榜单         | 52pojie        | ![https://api-hot.imsyy.top/52pojie](https://img.shields.io/website.svg?label=52pojie&url=https://api-hot.imsyy.top/52pojie&cacheSeconds=7200)                      |
-| 全球主机交流     | 榜单         | hostloc        | ![https://api-hot.imsyy.top/hostloc](https://img.shields.io/website.svg?label=hostloc&url=https://api-hot.imsyy.top/hostloc&cacheSeconds=7200)                      |
-| 虎嗅             | 24小时       | huxiu          | ![https://api-hot.imsyy.top/huxiu](https://img.shields.io/website.svg?label=huxiu&url=https://api-hot.imsyy.top/huxiu&cacheSeconds=7200)                            |
-| 酷安             | 热榜         | coolapk        | ![https://api-hot.imsyy.top/coolapk](https://img.shields.io/website.svg?label=coolapk&url=https://api-hot.imsyy.top/coolapk&cacheSeconds=7200)                      |
-| 虎扑             | 步行街热帖   | hupu           | ![https://api-hot.imsyy.top/hupu](https://img.shields.io/website.svg?label=hupu&url=https://api-hot.imsyy.top/hupu&cacheSeconds=7200)                               |
-| 爱范儿           | 快讯         | ifanr          | ![https://api-hot.imsyy.top/ifanr](https://img.shields.io/website.svg?label=ifanr&url=https://api-hot.imsyy.top/ifanr&cacheSeconds=7200)                            |
-| 英雄联盟         | 更新公告     | lol            | ![https://api-hot.imsyy.top/lol](https://img.shields.io/website.svg?label=lol&url=https://api-hot.imsyy.top/lol&cacheSeconds=7200)                                  |
-| 米游社           | 最新消息     | miyoushe       | ![https://api-hot.imsyy.top/miyoushe](https://img.shields.io/website.svg?label=miyoushe&url=https://api-hot.imsyy.top/miyoushe&cacheSeconds=7200)                   |
-| 原神             | 最新消息     | genshin        | ![https://api-hot.imsyy.top/genshin](https://img.shields.io/website.svg?label=genshin&url=https://api-hot.imsyy.top/genshin&cacheSeconds=7200)                      |
-| 崩坏3            | 最新动态     | honkai         | ![https://api-hot.imsyy.top/honkai](https://img.shields.io/website.svg?label=honkai&url=https://api-hot.imsyy.top/honkai&cacheSeconds=7200)                         |
-| 崩坏：星穹铁道   | 最新动态     | starrail       | ![https://api-hot.imsyy.top/starrail](https://img.shields.io/website.svg?label=starrail&url=https://api-hot.imsyy.top/starrail&cacheSeconds=7200)                   |
-| 微信读书         | 飙升榜       | weread         | ![https://api-hot.imsyy.top/weread](https://img.shields.io/website.svg?label=weread&url=https://api-hot.imsyy.top/weread&cacheSeconds=7200)                         |
-| NGA              | 热帖         | ngabbs         | ![https://api-hot.imsyy.top/ngabbs](https://img.shields.io/website.svg?label=ngabbs&url=https://api-hot.imsyy.top/ngabbs&cacheSeconds=7200)                         |
-| V2EX             | 主题榜       | v2ex           | ![https://api-hot.imsyy.top/v2ex](https://img.shields.io/website.svg?label=v2ex&url=https://api-hot.imsyy.top/v2ex&cacheSeconds=7200)                               |
-| HelloGitHub      | Trending     | hellogithub    | ![https://api-hot.imsyy.top/hellogithub](https://img.shields.io/website.svg?label=hellogithub&url=https://api-hot.imsyy.top/hellogithub&cacheSeconds=7200)          |
-| 中央气象台       | 全国气象预警 | weatheralarm   | ![https://api-hot.imsyy.top/weatheralarm](https://img.shields.io/website.svg?label=weatheralarm&url=https://api-hot.imsyy.top/weatheralarm&cacheSeconds=7200)       |
-| 中国地震台       | 地震速报     | earthquake     | ![https://api-hot.imsyy.top/earthquake](https://img.shields.io/website.svg?label=earthquake&url=https://api-hot.imsyy.top/earthquake&cacheSeconds=7200)             |
-| 历史上的今天     | 月-日        | history        | ![https://api-hot.imsyy.top/history](https://img.shields.io/website.svg?label=history&url=https://api-hot.imsyy.top/history&cacheSeconds=7200)                      |
+| 哔哩哔哩         | 热门榜       | bilibili       | ![https://dailyhotapi-deno.gaq152.deno.net/bilibili](https://img.shields.io/website.svg?label=bilibili&url=https://dailyhotapi-deno.gaq152.deno.net/bilibili&cacheSeconds=7200)                   |
+| AcFun            | 排行榜       | acfun          | ![https://dailyhotapi-deno.gaq152.deno.net/acfun](https://img.shields.io/website.svg?label=acfun&url=https://dailyhotapi-deno.gaq152.deno.net/acfun&cacheSeconds=7200)                            |
+| 微博             | 热搜榜       | weibo          | ![https://dailyhotapi-deno.gaq152.deno.net/weibo](https://img.shields.io/website.svg?label=weibo&url=https://dailyhotapi-deno.gaq152.deno.net/weibo&cacheSeconds=7200)                            |
+| 知乎             | 热榜         | zhihu          | ![https://dailyhotapi-deno.gaq152.deno.net/zhihu](https://img.shields.io/website.svg?label=zhihu&url=https://dailyhotapi-deno.gaq152.deno.net/zhihu&cacheSeconds=7200)                            |
+| 知乎日报         | 推荐榜       | zhihu-daily    | ![https://dailyhotapi-deno.gaq152.deno.net/zhihu-daily](https://img.shields.io/website.svg?label=zhihu-daily&url=https://dailyhotapi-deno.gaq152.deno.net/zhihu-daily&cacheSeconds=7200)          |
+| 百度             | 热搜榜       | baidu          | ![https://dailyhotapi-deno.gaq152.deno.net/baidu](https://img.shields.io/website.svg?label=baidu&url=https://dailyhotapi-deno.gaq152.deno.net/baidu&cacheSeconds=7200)                            |
+| 抖音             | 热点榜       | douyin         | ![https://dailyhotapi-deno.gaq152.deno.net/douyin](https://img.shields.io/website.svg?label=douyin&url=https://dailyhotapi-deno.gaq152.deno.net/douyin&cacheSeconds=7200)                         |
+| 快手             | 热点榜       | kuaishou       | ![https://dailyhotapi-deno.gaq152.deno.net/kuaishou](https://img.shields.io/website.svg?label=kuaishou&url=https://dailyhotapi-deno.gaq152.deno.net/kuaishou&cacheSeconds=7200)                   |
+| 豆瓣电影         | 新片榜       | douban-movie   | ![https://dailyhotapi-deno.gaq152.deno.net/douban-movie](https://img.shields.io/website.svg?label=douban-movie&url=https://dailyhotapi-deno.gaq152.deno.net/douban-movie&cacheSeconds=7200)       |
+| 豆瓣讨论小组     | 讨论精选     | douban-group   | ![https://dailyhotapi-deno.gaq152.deno.net/douban-group](https://img.shields.io/website.svg?label=douban-group&url=https://dailyhotapi-deno.gaq152.deno.net/douban-group&cacheSeconds=7200)       |
+| 百度贴吧         | 热议榜       | tieba          | ![https://dailyhotapi-deno.gaq152.deno.net/tieba](https://img.shields.io/website.svg?label=tieba&url=https://dailyhotapi-deno.gaq152.deno.net/tieba&cacheSeconds=7200)                            |
+| 少数派           | 热榜         | sspai          | ![https://dailyhotapi-deno.gaq152.deno.net/sspai](https://img.shields.io/website.svg?label=sspai&url=https://dailyhotapi-deno.gaq152.deno.net/sspai&cacheSeconds=7200)                            |
+| IT之家           | 热榜         | ithome         | ![https://dailyhotapi-deno.gaq152.deno.net/ithome](https://img.shields.io/website.svg?label=ithome&url=https://dailyhotapi-deno.gaq152.deno.net/ithome&cacheSeconds=7200)                         |
+| IT之家「喜加一」 | 最新动态     | ithome-xijiayi | ![https://dailyhotapi-deno.gaq152.deno.net/ithome-xijiayi](https://img.shields.io/website.svg?label=ithome-xijiayi&url=https://dailyhotapi-deno.gaq152.deno.net/ithome-xijiayi&cacheSeconds=7200) |
+| 简书             | 热门推荐     | jianshu        | ![https://dailyhotapi-deno.gaq152.deno.net/jianshu](https://img.shields.io/website.svg?label=jianshu&url=https://dailyhotapi-deno.gaq152.deno.net/jianshu&cacheSeconds=7200)                      |
+| 果壳             | 热门文章     | guokr          | ![https://dailyhotapi-deno.gaq152.deno.net/guokr](https://img.shields.io/website.svg?label=guokr&url=https://dailyhotapi-deno.gaq152.deno.net/guokr&cacheSeconds=7200)                            |
+| 澎湃新闻         | 热榜         | thepaper       | ![https://dailyhotapi-deno.gaq152.deno.net/thepaper](https://img.shields.io/website.svg?label=thepaper&url=https://dailyhotapi-deno.gaq152.deno.net/thepaper&cacheSeconds=7200)                   |
+| 今日头条         | 热榜         | toutiao        | ![https://dailyhotapi-deno.gaq152.deno.net/toutiao](https://img.shields.io/website.svg?label=toutiao&url=https://dailyhotapi-deno.gaq152.deno.net/toutiao&cacheSeconds=7200)                      |
+| 36 氪            | 热榜         | 36kr           | ![https://dailyhotapi-deno.gaq152.deno.net/36kr](https://img.shields.io/website.svg?label=36kr&url=https://dailyhotapi-deno.gaq152.deno.net/36kr&cacheSeconds=7200)                               |
+| 51CTO            | 推荐榜       | 51cto          | ![https://dailyhotapi-deno.gaq152.deno.net/51cto](https://img.shields.io/website.svg?label=51cto&url=https://dailyhotapi-deno.gaq152.deno.net/51cto&cacheSeconds=7200)                            |
+| CSDN             | 排行榜       | csdn           | ![https://dailyhotapi-deno.gaq152.deno.net/csdn](https://img.shields.io/website.svg?label=csdn&url=https://dailyhotapi-deno.gaq152.deno.net/csdn&cacheSeconds=7200)                               |
+| NodeSeek         | 最新动态     | nodeseek       | ![https://dailyhotapi-deno.gaq152.deno.net/nodeseek](https://img.shields.io/website.svg?label=nodeseek&url=https://dailyhotapi-deno.gaq152.deno.net/nodeseek&cacheSeconds=7200)                   |
+| 稀土掘金         | 热榜         | juejin         | ![https://dailyhotapi-deno.gaq152.deno.net/juejin](https://img.shields.io/website.svg?label=juejin&url=https://dailyhotapi-deno.gaq152.deno.net/juejin&cacheSeconds=7200)                         |
+| 腾讯新闻         | 热点榜       | qq-news        | ![https://dailyhotapi-deno.gaq152.deno.net/qq-news](https://img.shields.io/website.svg?label=qq-news&url=https://dailyhotapi-deno.gaq152.deno.net/qq-news&cacheSeconds=7200)                      |
+| 新浪网           | 热榜         | sina           | ![https://dailyhotapi-deno.gaq152.deno.net/sina](https://img.shields.io/website.svg?label=sina&url=https://dailyhotapi-deno.gaq152.deno.net/sina&cacheSeconds=7200)                               |
+| 新浪新闻         | 热点榜       | sina-news      | ![https://dailyhotapi-deno.gaq152.deno.net/sina-news](https://img.shields.io/website.svg?label=sina-news&url=https://dailyhotapi-deno.gaq152.deno.net/sina-news&cacheSeconds=7200)                |
+| 网易新闻         | 热点榜       | netease-news   | ![https://dailyhotapi-deno.gaq152.deno.net/netease-news](https://img.shields.io/website.svg?label=netease-news&url=https://dailyhotapi-deno.gaq152.deno.net/netease-news&cacheSeconds=7200)       |
+| 吾爱破解         | 榜单         | 52pojie        | ![https://dailyhotapi-deno.gaq152.deno.net/52pojie](https://img.shields.io/website.svg?label=52pojie&url=https://dailyhotapi-deno.gaq152.deno.net/52pojie&cacheSeconds=7200)                      |
+| 全球主机交流     | 榜单         | hostloc        | ![https://dailyhotapi-deno.gaq152.deno.net/hostloc](https://img.shields.io/website.svg?label=hostloc&url=https://dailyhotapi-deno.gaq152.deno.net/hostloc&cacheSeconds=7200)                      |
+| 虎嗅             | 24小时       | huxiu          | ![https://dailyhotapi-deno.gaq152.deno.net/huxiu](https://img.shields.io/website.svg?label=huxiu&url=https://dailyhotapi-deno.gaq152.deno.net/huxiu&cacheSeconds=7200)                            |
+| 酷安             | 热榜         | coolapk        | ![https://dailyhotapi-deno.gaq152.deno.net/coolapk](https://img.shields.io/website.svg?label=coolapk&url=https://dailyhotapi-deno.gaq152.deno.net/coolapk&cacheSeconds=7200)                      |
+| 虎扑             | 步行街热帖   | hupu           | ![https://dailyhotapi-deno.gaq152.deno.net/hupu](https://img.shields.io/website.svg?label=hupu&url=https://dailyhotapi-deno.gaq152.deno.net/hupu&cacheSeconds=7200)                               |
+| 爱范儿           | 快讯         | ifanr          | ![https://dailyhotapi-deno.gaq152.deno.net/ifanr](https://img.shields.io/website.svg?label=ifanr&url=https://dailyhotapi-deno.gaq152.deno.net/ifanr&cacheSeconds=7200)                            |
+| 英雄联盟         | 更新公告     | lol            | ![https://dailyhotapi-deno.gaq152.deno.net/lol](https://img.shields.io/website.svg?label=lol&url=https://dailyhotapi-deno.gaq152.deno.net/lol&cacheSeconds=7200)                                  |
+| 米游社           | 最新消息     | miyoushe       | ![https://dailyhotapi-deno.gaq152.deno.net/miyoushe](https://img.shields.io/website.svg?label=miyoushe&url=https://dailyhotapi-deno.gaq152.deno.net/miyoushe&cacheSeconds=7200)                   |
+| 原神             | 最新消息     | genshin        | ![https://dailyhotapi-deno.gaq152.deno.net/genshin](https://img.shields.io/website.svg?label=genshin&url=https://dailyhotapi-deno.gaq152.deno.net/genshin&cacheSeconds=7200)                      |
+| 崩坏3            | 最新动态     | honkai         | ![https://dailyhotapi-deno.gaq152.deno.net/honkai](https://img.shields.io/website.svg?label=honkai&url=https://dailyhotapi-deno.gaq152.deno.net/honkai&cacheSeconds=7200)                         |
+| 崩坏：星穹铁道   | 最新动态     | starrail       | ![https://dailyhotapi-deno.gaq152.deno.net/starrail](https://img.shields.io/website.svg?label=starrail&url=https://dailyhotapi-deno.gaq152.deno.net/starrail&cacheSeconds=7200)                   |
+| 微信读书         | 飙升榜       | weread         | ![https://dailyhotapi-deno.gaq152.deno.net/weread](https://img.shields.io/website.svg?label=weread&url=https://dailyhotapi-deno.gaq152.deno.net/weread&cacheSeconds=7200)                         |
+| NGA              | 热帖         | ngabbs         | ![https://dailyhotapi-deno.gaq152.deno.net/ngabbs](https://img.shields.io/website.svg?label=ngabbs&url=https://dailyhotapi-deno.gaq152.deno.net/ngabbs&cacheSeconds=7200)                         |
+| V2EX             | 主题榜       | v2ex           | ![https://dailyhotapi-deno.gaq152.deno.net/v2ex](https://img.shields.io/website.svg?label=v2ex&url=https://dailyhotapi-deno.gaq152.deno.net/v2ex&cacheSeconds=7200)                               |
+| HelloGitHub      | Trending     | hellogithub    | ![https://dailyhotapi-deno.gaq152.deno.net/hellogithub](https://img.shields.io/website.svg?label=hellogithub&url=https://dailyhotapi-deno.gaq152.deno.net/hellogithub&cacheSeconds=7200)          |
+| 中央气象台       | 全国气象预警 | weatheralarm   | ![https://dailyhotapi-deno.gaq152.deno.net/weatheralarm](https://img.shields.io/website.svg?label=weatheralarm&url=https://dailyhotapi-deno.gaq152.deno.net/weatheralarm&cacheSeconds=7200)       |
+| 中国地震台       | 地震速报     | earthquake     | ![https://dailyhotapi-deno.gaq152.deno.net/earthquake](https://img.shields.io/website.svg?label=earthquake&url=https://dailyhotapi-deno.gaq152.deno.net/earthquake&cacheSeconds=7200)             |
+| 历史上的今天     | 月-日        | history        | ![https://dailyhotapi-deno.gaq152.deno.net/history](https://img.shields.io/website.svg?label=history&url=https://dailyhotapi-deno.gaq152.deno.net/history&cacheSeconds=7200)                      |
 
 </details>
 
-## ⚙️ 使用
-
-本项目支持 `Node.js` 调用，可在安装完成后调用 `serveHotApi` 来开启服务器
-
-> 该方式无法使用部分需要 Puppeteer 环境的接口
-
-```bash
-pnpm add dailyhot-api
-```
-
-```js
-import serveHotApi from "dailyhot-api";
-
-/**
- * 启动服务器
- * @param {Number} [port] - 端口号
- * @returns {Promise<void>}
- */
-serveHotApi(3000);
-```
-
 ## ⚙️ 部署
-
-具体使用说明可参考 [我的博客](https://blog.imsyy.top/posts/2024/0408)，下方仅讲解基础操作：
-
-### Docker 部署
-
-> 安装及配置 Docker 将不在此处说明，请自行解决
-
-#### 本地构建
-
-```bash
-# 构建
-docker build -t dailyhot-api .
-
-# 运行
-docker run --restart always -p 6688:6688 -d dailyhot-api
-# 或使用 Docker Compose
-docker-compose up -d
-```
-
-#### 在线部署
-
-```bash
-# 拉取
-docker pull imsyy/dailyhot-api:latest
-
-# 运行
-docker run --restart always -p 6688:6688 -d imsyy/dailyhot-api:latest
-```
-
-### 手动部署
-
-最直接的方式，您可以按照以下步骤将 `DailyHotApi` 部署在您的电脑、服务器或者其他任何地方
-
-#### 安装
-
-```bash
-git clone https://github.com/imsyy/DailyHotApi.git
-cd DailyHotApi
-```
-
-然后再执行安装依赖
-
-```bash
-npm install
-```
-
-复制 `/.env.example` 文件并重命名为 `/.env` 并修改配置
-
-#### 开发
-
-```bash
-npm run dev
-```
-
-成功启动后程序会在控制台输出可访问的地址
-
-#### 编译运行
-
-```bash
-npm run build
-npm run start
-```
-
-### pm2 部署
-
-```bash
-npm i pm2 -g
-sh ./deploy.sh
-```
-
-成功启动后程序会在控制台输出可访问的地址
-
-### Vercel 部署
-
-本项目支持通过 `Vercel` 进行一键部署，点击下方按钮或前往 [项目仓库](https://github.com/imsyy/DailyHotApi-Vercel) 进行手动部署
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/imsyys-projects/clone?repository-url=https%3A%2F%2Fgithub.com%2Fimsyy%2FDailyHotApi-Vercel)
-
-### Railway 部署
-
-本项目支持使用 [Railway](https://railway.app/) 一键部署，请先将本项目 fork 到您的仓库中，即可使用一键部署。
-
-### Zeabur 部署
-
-本项目支持使用 [Zeabur](https://zeabur.com/) 一键部署，请先将本项目 fork 到您的仓库中，即可使用一键部署。
-
-### Deno Deploy 部署
 
 本项目支持使用 [Deno Deploy](https://deno.com/deploy) 一键部署，具有极快的冷启动速度，且国内可直接访问。
 
 > 示例站点：https://dailyhotapi-deno.gaq152.deno.net/
 
-[![Deploy on Deno Deploy](https://deno.com/deno-deploy-button.svg)](https://dash.deno.com/new_project)
+[![Deploy on Deno Deploy](https://deno.com/deno-deploy-button.svg)](https://app.deno.com/new?clone=https://github.com/Gaq152/DailyHotApi)
 
 部署步骤：
-1. Fork 本项目到您的 GitHub 仓库
-2. 点击上方按钮或访问 [Deno Deploy](https://dash.deno.com)
-3. 连接您的 GitHub 仓库
-4. 选择入口文件为 `main.ts`
-5. 点击部署即可
+1. 点击上方按钮
+2. 登录 GitHub 账号并授权
+3. 选择入口文件为 `main.ts`
+4. 点击部署即可
+
+### 本地开发
+
+```bash
+# 安装 Deno
+# Windows: irm https://deno.land/install.ps1 | iex
+# macOS/Linux: curl -fsSL https://deno.land/install.sh | sh
+
+# 克隆项目
+git clone https://github.com/Gaq152/DailyHotApi.git
+cd DailyHotApi
+
+# 开发模式（热重载）
+deno task dev
+
+# 生产模式
+deno task start
+```
 
 ## ⚠️ 须知
 
@@ -225,4 +131,4 @@ sh ./deploy.sh
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=imsyy/DailyHotApi&type=Date)](https://star-history.com/#imsyy/DailyHotApi&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Gaq152/DailyHotApi&type=Date)](https://star-history.com/#Gaq152/DailyHotApi&Date)
