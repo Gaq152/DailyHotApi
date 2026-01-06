@@ -3,6 +3,7 @@
     "dev": "deno run --allow-net --allow-env --allow-read --watch main.ts",
     "start": "deno run --allow-net --allow-env --allow-read main.ts"
   },
+  "unstable": ["sloppy-imports"],
   "imports": {
     "hono": "npm:hono@^4.8.9",
     "hono/": "npm:hono@^4.8.9/",
