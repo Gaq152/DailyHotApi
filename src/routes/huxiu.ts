@@ -22,6 +22,7 @@ const getList = async (noCache: boolean) => {
   const result = await get({
     url,
     noCache,
+    responseType: "json",
     headers: {
       "User-Agent": "Mozilla/5.0",
       Referer: "https://www.huxiu.com/moment/",
