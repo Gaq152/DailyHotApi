@@ -46,7 +46,7 @@ const getList = async (options: Options, noCache: boolean): Promise<RouterResTyp
   // 正则查找
   const pattern = /<!--s-data:(.*?)-->/s;
   const matchResult = result.data.match(pattern);
-  const jsonObject = JSON.parse(matchResult[1]).cards[0].content;
+  const jsonObject = JSON.parse(matchResult[1]).cards[0].content[0].content;
   return {
     ...result,
     data: jsonObject.map((v: RouterType["baidu"]) => ({
