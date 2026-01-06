@@ -49,16 +49,16 @@ const getList = async (options: Options, noCache: boolean): Promise<RouterResTyp
   const jsonObject = JSON.parse(matchResult[1]).cards[0].content[0].content;
   return {
     ...result,
-    data: jsonObject.map((v: RouterType["baidu"]) => ({
-      id: v.index,
+    data: jsonObject.map((v: RouterType["baidu"], index: number) => ({
+      id: index,
       title: v.word,
-      desc: v.desc,
-      cover: v.img,
-      author: v.show?.length ? v.show : "",
+      desc: "",
+      cover: "",
+      author: "",
       timestamp: 0,
-      hot: Number(v.hotScore || 0),
-      url: `https://www.baidu.com/s?wd=${encodeURIComponent(v.query)}`,
-      mobileUrl: v.rawUrl,
+      hot: 0,
+      url: v.url || `https://www.baidu.com/s?wd=${encodeURIComponent(v.word)}`,
+      mobileUrl: v.url || `https://m.baidu.com/s?word=${encodeURIComponent(v.word)}`,
     })),
   };
 };
