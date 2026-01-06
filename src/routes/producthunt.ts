@@ -1,7 +1,7 @@
-import type { RouterData } from "../types.d.ts";
+import type { RouterData } from "../types.ts";
 import { get } from "../utils/getData.ts";
 import { load } from "cheerio";
-import type { RouterType } from "../router.types.d.ts";
+import type { RouterType } from "../router.types.ts";
 
 export const handleRoute = async (_: undefined, noCache: boolean) => {
   const listData = await getList(noCache);

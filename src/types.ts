@@ -1,4 +1,5 @@
 import type { Context } from "hono";
+import { Buffer } from "node:buffer";
 
 // 响应类型（替代 axios 的 ResponseType）
 export type ResponseType = "json" | "text" | "arraybuffer";

@@ -1,5 +1,5 @@
-import type { RouterData } from "../types.d.ts";
-import type { RouterType } from "../router.types.d.ts";
+import type { RouterData } from "../types.ts";
+import type { RouterType } from "../router.types.ts";
 import { get } from "../utils/getData.ts";
 
 export const handleRoute = async (_: undefined, noCache: boolean) => {

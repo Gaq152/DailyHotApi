@@ -1,4 +1,4 @@
-import type { RouterData, ListContext, Options, RouterResType } from "../types.d.ts";
+import type { RouterData, ListContext, Options, RouterResType } from "../types.ts";
 import { get } from "../utils/getData.ts";
 import { getTime } from "../utils/getTime.ts";
 import { parseRSS } from "../utils/parseRSS.ts";

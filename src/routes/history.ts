@@ -1,5 +1,5 @@
-import type { RouterData, ListContext, Options } from "../types.d.ts";
-import type { RouterType } from "../router.types.d.ts";
+import type { RouterData, ListContext, Options } from "../types.ts";
+import type { RouterType } from "../router.types.ts";
 import { load } from "cheerio";
 import { get } from "../utils/getData.ts";
 import { getCurrentDateTime } from "../utils/getTime.ts";

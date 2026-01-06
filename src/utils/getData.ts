@@ -1,7 +1,16 @@
-import type { Get, Post } from "../types.d.ts";
+import type { Get, Post } from "../types.ts";
+import { Buffer } from "node:buffer";
 import { config } from "../config.ts";
 import { getCache, setCache, delCache } from "./cache.ts";
 import logger from "./logger.ts";
+
+// 返回类型定义
+// deno-lint-ignore no-explicit-any
+export interface GetResult<T = any> {
+  fromCache: boolean;
+  updateTime: string;
+  data: T;
+}
 
 // 构建带参数的 URL
 const buildUrl = (url: string, params?: Record<string, string | number>): string => {
@@ -34,7 +43,8 @@ const fetchWithTimeout = async (
 };
 
 // GET
-export const get = async (options: Get) => {
+// deno-lint-ignore no-explicit-any
+export const get = async <T = any>(options: Get): Promise<GetResult<T>> => {
   const {
     url,
     headers,
@@ -56,7 +66,7 @@ export const get = async (options: Get) => {
         return {
           fromCache: true,
           updateTime: cachedData.updateTime,
-          data: cachedData.data,
+          data: cachedData.data as T,
         };
       }
     }
@@ -93,7 +103,7 @@ export const get = async (options: Get) => {
     await setCache(fullUrl, { data, updateTime }, ttl);
     // 返回数据
     logger.info(`✅ [${response.status}] request was successful`);
-    return { fromCache: false, updateTime, data };
+    return { fromCache: false, updateTime, data: data as T };
   } catch (error) {
     logger.error("❌ [ERROR] request failed");
     throw error;
@@ -101,7 +111,8 @@ export const get = async (options: Get) => {
 };
 
 // POST
-export const post = async (options: Post) => {
+// deno-lint-ignore no-explicit-any
+export const post = async <T = any>(options: Post): Promise<GetResult<T>> => {
   const { url, headers, body, noCache, ttl = config.CACHE_TTL, originaInfo = false } = options;
   logger.info(`🌐 [POST] ${url}`);
   try {
@@ -111,7 +122,7 @@ export const post = async (options: Post) => {
       const cachedData = await getCache(url);
       if (cachedData) {
         logger.info("💾 [CACHE] The request is cached");
-        return { fromCache: true, updateTime: cachedData.updateTime, data: cachedData.data };
+        return { fromCache: true, updateTime: cachedData.updateTime, data: cachedData.data as T };
       }
     }
     // 缓存不存在时请求接口
@@ -149,7 +160,7 @@ export const post = async (options: Post) => {
     }
     // 返回数据
     logger.info(`✅ [${response.status}] request was successful`);
-    return { fromCache: false, updateTime, data };
+    return { fromCache: false, updateTime, data: data as T };
   } catch (error) {
     logger.error("❌ [ERROR] request failed");
     throw error;

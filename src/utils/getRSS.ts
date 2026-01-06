@@ -1,4 +1,4 @@
-import type { RouterData, ListItem } from "../types.d.ts";
+import type { RouterData, ListItem } from "../types.ts";
 import { Feed } from "feed";
 import logger from "./logger.ts";
 

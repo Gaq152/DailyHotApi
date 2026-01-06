@@ -1,5 +1,5 @@
-import type { RouterType } from "../router.types.d.ts";
-import type { ListItem, RouterData } from "../types.d.ts";
+import type { RouterType } from "../router.types.ts";
+import type { ListItem, RouterData } from "../types.ts";
 import { get } from "../utils/getData.ts";
 import { parseChineseNumber } from "../utils/getNum.ts";
 import UserAgent from "user-agents";

@@ -1,4 +1,4 @@
-import type { RouterData } from "../types.d.ts";
+import type { RouterData } from "../types.ts";
 import { load } from "cheerio";
 import { get } from "../utils/getData.ts";
 

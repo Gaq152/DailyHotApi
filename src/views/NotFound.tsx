@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 import { html } from "hono/html";
-import Layout from "./Layout.ts";
+import Layout from "./Layout.tsx";
 
 const NotFound: FC = () => {
   return (

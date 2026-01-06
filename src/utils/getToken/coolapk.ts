@@ -1,4 +1,5 @@
 import md5 from "md5";
+import { Buffer } from "node:buffer";
 
 /**
  * 获取随机的DEVICE_ID

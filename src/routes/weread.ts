@@ -1,5 +1,5 @@
-import type { ListContext, RouterData } from "../types.d.ts";
-import type { RouterType } from "../router.types.d.ts";
+import type { ListContext, RouterData } from "../types.ts";
+import type { RouterType } from "../router.types.ts";
 import { get } from "../utils/getData.ts";
 import getWereadID from "../utils/getToken/weread.ts";
 import { getTime } from "../utils/getTime.ts";

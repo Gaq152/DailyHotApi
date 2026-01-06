@@ -1,5 +1,6 @@
 import { config } from "./config.ts";
 import { Hono } from "hono";
+import type { RouterData } from "./types.ts";
 import getRSS from "./utils/getRSS.ts";
 
 // 静态导入所有路由
@@ -62,8 +63,12 @@ import * as routeZhihu from "./routes/zhihu.ts";
 
 const app = new Hono();
 
+// 路由模块类型
+// deno-lint-ignore no-explicit-any
+type RouteModule = { handleRoute: (c: any, noCache: boolean) => Promise<any> };
+
 // 路由映射表
-const routeMap: Record<string, { handleRoute: (c: unknown, noCache: boolean) => Promise<unknown> }> = {
+const routeMap: Record<string, RouteModule> = {
   "36kr": route36kr,
   "51cto": route51cto,
   "52pojie": route52pojie,
@@ -145,7 +150,8 @@ for (const routeName of allRoutePath) {
     const rssEnabled = c.req.query("rss") === "true";
     // 获取路由处理函数
     const { handleRoute } = routeMap[routeName];
-    const listData = await handleRoute(c, noCache) as { data?: unknown[]; total?: number };
+    // deno-lint-ignore no-explicit-any
+    const listData = await handleRoute(c, noCache) as any;
     // 是否限制条目
     if (limit && listData?.data?.length && listData.data.length > parseInt(limit)) {
       listData.total = parseInt(limit);
@@ -153,7 +159,7 @@ for (const routeName of allRoutePath) {
     }
     // 是否输出 RSS
     if (rssEnabled || config.RSS_MODE) {
-      const rss = getRSS(listData);
+      const rss = getRSS(listData as RouterData);
       if (typeof rss === "string") {
         c.header("Content-Type", "application/xml; charset=utf-8");
         return c.body(rss);

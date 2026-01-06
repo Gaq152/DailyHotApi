@@ -1,5 +1,5 @@
-import type { RouterData, RouterResType } from "../types.d.ts";
-import type { RouterType } from "../router.types.d.ts";
+import type { RouterData, RouterResType } from "../types.ts";
+import type { RouterType } from "../router.types.ts";
 import { getToken, sign } from "../utils/getToken/51cto.ts";
 import { get } from "../utils/getData.ts";
 import { getTime } from "../utils/getTime.ts";

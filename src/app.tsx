@@ -8,9 +8,9 @@ import { trimTrailingSlash } from "hono/trailing-slash";
 import logger from "./utils/logger.ts";
 import registry from "./registry.ts";
 import robotstxt from "./robots.txt.ts";
-import NotFound from "./views/NotFound.ts";
-import Home from "./views/Home.ts";
-import Error from "./views/Error.ts";
+import NotFound from "./views/NotFound.tsx";
+import Home from "./views/Home.tsx";
+import Error from "./views/Error.tsx";
 
 const app = new Hono();
 
