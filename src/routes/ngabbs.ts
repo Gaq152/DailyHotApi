@@ -39,9 +39,11 @@ const getList = async (noCache: boolean) => {
     },
   });
   const list = result.data.result[0];
+  // 根据 tid 去重
+  const uniqueList = [...new Map(list.map((v: RouterType["ngabbs"]) => [v.tid, v])).values()];
   return {
     ...result,
-    data: list.map((v: RouterType["ngabbs"]) => ({
+    data: uniqueList.map((v: RouterType["ngabbs"]) => ({
       id: v.tid,
       title: v.subject,
       author: v.author,
