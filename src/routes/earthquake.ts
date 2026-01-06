@@ -28,7 +28,7 @@ export const handleRoute = async (_: undefined, noCache: boolean) => {
 
 const getList = async (noCache: boolean) => {
   const url = `https://news.ceic.ac.cn/speedsearch.html`;
-  const result = await get({ url, noCache });
+  const result = await get({ url, noCache, responseType: "text" });
   const regex = /const newdata = (\[.*?\]);/s;
   const match = result.data.match(regex);
   const list = match && match[1] ? JSON.parse(match[1]) : [];

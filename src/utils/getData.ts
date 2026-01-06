@@ -84,15 +84,23 @@ export const get = async <T = any>(options: Get): Promise<GetResult<T>> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // 根据 responseType 解析响应
+    // 根据 responseType 或 Content-Type 自动解析响应
     let responseData: unknown;
     if (responseType === "arraybuffer") {
       responseData = await response.arrayBuffer();
     } else if (responseType === "text") {
       responseData = await response.text();
-    } else {
-      // 默认 json
+    } else if (responseType === "json") {
       responseData = await response.json();
+    } else {
+      // 自动检测：根据 Content-Type 判断
+      const contentType = response.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        responseData = await response.json();
+      } else {
+        // 默认返回文本（HTML、XML 等）
+        responseData = await response.text();
+      }
     }
 
     // 存储新获取的数据到缓存

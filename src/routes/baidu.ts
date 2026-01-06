@@ -37,6 +37,7 @@ const getList = async (options: Options, noCache: boolean): Promise<RouterResTyp
   const result = await get({
     url,
     noCache,
+    responseType: "text",
     headers: {
       "User-Agent":
         "Mozilla/5.0 (iPhone; CPU iPhone OS 14_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/1.0 Mobile/12F69 Safari/605.1.15",

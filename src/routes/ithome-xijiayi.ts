@@ -28,7 +28,7 @@ const replaceLink = (url: string, getId: boolean = false) => {
 
 const getList = async (noCache: boolean) => {
   const url = `https://www.ithome.com/zt/xijiayi`;
-  const result = await get({ url, noCache });
+  const result = await get({ url, noCache, responseType: "text" });
   const $ = load(result.data);
   const listDom = $(".newslist li");
   const listData = listDom.toArray().map((item) => {

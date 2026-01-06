@@ -19,9 +19,10 @@ export const handleRoute = async (_: undefined, noCache: boolean) => {
 
 const getList = async (noCache: boolean) => {
   const baseUrl = "https://news.ycombinator.com";
-  const result = await get({ 
-    url: baseUrl, 
+  const result = await get({
+    url: baseUrl,
     noCache,
+    responseType: "text",
     headers: {
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }

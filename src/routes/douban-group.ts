@@ -30,7 +30,7 @@ const getNumbers = (text: string | undefined) => {
 
 const getList = async (noCache: boolean) => {
   const url = `https://www.douban.com/group/explore`;
-  const result = await get({ url, noCache });
+  const result = await get({ url, noCache, responseType: "text" });
   const $ = load(result.data);
   const listDom = $(".article .channel-item");
   const listData = listDom.toArray().map((item) => {

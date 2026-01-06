@@ -28,6 +28,7 @@ const getList = async (noCache: boolean) => {
   const result = await get({
     url,
     noCache,
+    responseType: "text",
     headers: {
       Referer: "https://www.jianshu.com",
     },
