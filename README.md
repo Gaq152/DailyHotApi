@@ -194,6 +194,8 @@ sh ./deploy.sh
 
 本项目支持使用 [Deno Deploy](https://deno.com/deploy) 一键部署，具有极快的冷启动速度，且国内可直接访问。
 
+> 示例站点：https://dailyhotapi-deno.gaq152.deno.net/
+
 [![Deploy on Deno Deploy](https://deno.com/deno-deploy-button.svg)](https://dash.deno.com/new_project)
 
 部署步骤：
