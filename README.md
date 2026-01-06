@@ -85,7 +85,7 @@
 
 > 示例站点：https://dailyhotapi-deno.gaq152.deno.net/
 
-[![Deploy on Deno Deploy](https://deno.com/deno-deploy-button.svg)](https://app.deno.com/new?clone=https://github.com/Gaq152/DailyHotApi)
+[![Deploy on Deno Deploy](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/Gaq152/DailyHotApi)
 
 部署步骤：
 1. 点击上方按钮
