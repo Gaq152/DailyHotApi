@@ -134,13 +134,23 @@ export const post = async <T = any>(options: Post): Promise<GetResult<T>> => {
       }
     }
     // 缓存不存在时请求接口
-    const requestBody = typeof body === "object" && !(body instanceof Buffer)
-      ? JSON.stringify(body)
-      : body;
-
     const requestHeaders: Record<string, string> = { ...(headers as Record<string, string>) };
-    if (typeof body === "object" && !(body instanceof Buffer) && !requestHeaders["Content-Type"]) {
-      requestHeaders["Content-Type"] = "application/json";
+    let requestBody: BodyInit;
+
+    if (typeof body === "object" && !(body instanceof Buffer)) {
+      const contentType = requestHeaders["Content-Type"] || "";
+      if (contentType.includes("application/x-www-form-urlencoded")) {
+        // 表单格式
+        requestBody = new URLSearchParams(body as Record<string, string>).toString();
+      } else {
+        // JSON 格式
+        requestBody = JSON.stringify(body);
+        if (!requestHeaders["Content-Type"]) {
+          requestHeaders["Content-Type"] = "application/json";
+        }
+      }
+    } else {
+      requestBody = body as BodyInit;
     }
 
     const response = await fetchWithTimeout(
