@@ -52,7 +52,7 @@ export const get = async <T = any>(options: Get): Promise<GetResult<T>> => {
     noCache,
     ttl = config.CACHE_TTL,
     originaInfo = false,
-    responseType = "json",
+    responseType,
   } = options;
   const fullUrl = buildUrl(url, params);
   logger.info(`🌐 [GET] ${fullUrl}`);

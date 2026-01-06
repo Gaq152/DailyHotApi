@@ -116,14 +116,9 @@ export type RouterType = {
     event_time: number;
   };
   baidu: {
-    index: number;
+    isTop?: boolean;
     word: string;
-    desc: string;
-    img: string;
-    hotScore: string;
-    show: string;
-    rawUrl: string;
-    query: string;
+    url?: string;
   };
   miyoushe: {
     post: {
