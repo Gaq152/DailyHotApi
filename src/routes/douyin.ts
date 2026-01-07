@@ -17,30 +17,18 @@ export const handleRoute = async (_: undefined, noCache: boolean) => {
   return routeData;
 };
 
-// 获取抖音临时 Cookis
-const getDyCookies = async () => {
-  try {
-    const cookisUrl = "https://www.douyin.com/passport/general/login_guiding_strategy/?aid=6383";
-    const { data } = await get({ url: cookisUrl, originaInfo: true });
-    const pattern = /passport_csrf_token=(.*); Path/s;
-    const matchResult = data.headers["set-cookie"][0].match(pattern);
-    const cookieData = matchResult[1];
-    return cookieData;
-  } catch (error) {
-    console.error("获取抖音 Cookie 出错" + error);
-    return undefined;
-  }
-};
-
 const getList = async (noCache: boolean) => {
   const url =
     "https://www.douyin.com/aweme/v1/web/hot/search/list/?device_platform=webapp&aid=6383&channel=channel_pc_web&detail_list=1";
-  const cookie = await getDyCookies();
   const result = await get({
     url,
     noCache,
+    responseType: "json",
     headers: {
-      Cookie: `passport_csrf_token=${cookie}`,
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      Cookie: "passport_csrf_token=0",
+      Referer: "https://www.douyin.com/",
     },
   });
   const list = result.data.data.word_list;
