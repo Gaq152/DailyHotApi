@@ -2,6 +2,7 @@ import type { RouterData, ListContext, Options, RouterResType } from "../types.t
 import { get } from "../utils/getData.ts";
 import { getTime } from "../utils/getTime.ts";
 import { parseRSS } from "../utils/parseRSS.ts";
+import { htmlToMarkdown } from "../utils/htmlToMarkdown.ts";
 
 const areaMap: Record<string, string> = {
   china: "中文网",
@@ -48,7 +49,7 @@ const getList = async (options: Options, noCache: boolean): Promise<RouterResTyp
     data: list.map((v, i) => ({
       id: v.guid || i,
       title: v.title || "",
-      desc: v.content?.trim() || "",
+      desc: htmlToMarkdown(v.content || "") || "",
       author: v.author,
       timestamp: getTime(v.pubDate || 0),
       hot: undefined,
