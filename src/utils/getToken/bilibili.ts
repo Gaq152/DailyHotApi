@@ -66,18 +66,26 @@ const getWbiKeys = async (): Promise<EncodedKeys> => {
   };
 };
 
-const getBiliWbi = async (): Promise<string> => {
-  const cachedData = await getCache("bilibili-wbi");
-  if (cachedData?.data) return cachedData.data as string;
+// 获取 WBI keys（带缓存，keys 变化不频繁）
+const getCachedWbiKeys = async (): Promise<EncodedKeys> => {
+  const cachedKeys = await getCache("bilibili-wbi-keys");
+  if (cachedKeys?.data) {
+    return cachedKeys.data as EncodedKeys;
+  }
   const web_keys = await getWbiKeys();
-  const params = { foo: "114", bar: "514", baz: 1919810 };
-  const img_key = web_keys.img_key;
-  const sub_key = web_keys.sub_key;
-  const query = encWbi(params, img_key, sub_key);
-  await setCache("bilibili-wbi", {
-    data: query,
+  // 缓存 keys 1小时（keys 不常变化）
+  await setCache("bilibili-wbi-keys", {
+    data: web_keys,
     updateTime: new Date().toISOString(),
   });
+  return web_keys;
+};
+
+// 生成带 WBI 签名的查询参数
+const getBiliWbi = async (params: WbiParams = {}): Promise<string> => {
+  const web_keys = await getCachedWbiKeys();
+  // 每次调用都重新生成签名（因为包含时间戳 wts）
+  const query = encWbi(params, web_keys.img_key, web_keys.sub_key);
   return query;
 };
 

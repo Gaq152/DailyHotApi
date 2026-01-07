@@ -41,9 +41,10 @@ export const handleRoute = async (c: ListContext, noCache: boolean) => {
 };
 
 const getList = async (options: Options, noCache: boolean): Promise<RouterResType> => {
-  const { type } = options;
-  const wbiData = await getBiliWbi();
-  const url = `https://api.bilibili.com/x/web-interface/ranking/v2?rid=${type}&type=all&${wbiData}`;
+  const rid = options.type || "0";
+  // 传入实际请求参数生成 WBI 签名
+  const wbiData = await getBiliWbi({ rid, type: "all" });
+  const url = `https://api.bilibili.com/x/web-interface/ranking/v2?${wbiData}`;
   const result = await get({
     url,
     headers: {
@@ -87,7 +88,7 @@ const getList = async (options: Options, noCache: boolean): Promise<RouterResTyp
   // 采用备用接口
   else {
     logger.info('bilibili 备用接口')
-    const url = `https://api.bilibili.com/x/web-interface/ranking?jsonp=jsonp?rid=${type}&type=all&callback=__jp0`;
+    const url = `https://api.bilibili.com/x/web-interface/ranking?jsonp=jsonp?rid=${rid}&type=all&callback=__jp0`;
     const result = await get({
       url,
       headers: {
