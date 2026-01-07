@@ -2,6 +2,7 @@ import type { RouterData } from "../types.ts";
 import { get } from "../utils/getData.ts";
 import { getTime } from "../utils/getTime.ts";
 import { parseRSS } from "../utils/parseRSS.ts";
+import { htmlToMarkdown } from "../utils/htmlToMarkdown.ts";
 
 export const handleRoute = async (_: undefined, noCache: boolean) => {
   const listData = await getList(noCache);
@@ -35,7 +36,7 @@ const getList = async (noCache: boolean) => {
     return {
       id: item.guid || link || index,
       title: item.title || "",
-      desc: item.contentSnippet?.trim() || item.content?.trim() || "",
+      desc: htmlToMarkdown(item.content || "") || item.contentSnippet?.trim() || "",
       author: item.author,
       timestamp: getTime(item.pubDate || 0),
       url: link,
