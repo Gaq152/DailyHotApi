@@ -20,7 +20,7 @@ export const handleRoute = async (_: undefined, noCache: boolean) => {
 
 const getList = async (noCache: boolean) => {
   const url = "https://www.yystv.cn/home/get_home_docs_by_page";
-  const result = await get({ url, noCache });
+  const result = await get({ url, noCache, responseType: "json" });
   const list = result.data.data;
   return {
     ...result,

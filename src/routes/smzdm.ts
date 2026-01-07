@@ -34,7 +34,15 @@ export const handleRoute = async (c: ListContext, noCache: boolean) => {
 const getList = async (options: Options, noCache: boolean) => {
   const { type } = options;
   const url = `https://post.smzdm.com/rank/json_more/?unit=${type}`;
-  const result = await get({ url, noCache });
+  const result = await get({
+    url,
+    noCache,
+    responseType: "json",
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      Referer: "https://www.smzdm.com/",
+    },
+  });
   const list = result.data.data;
   return {
     ...result,
