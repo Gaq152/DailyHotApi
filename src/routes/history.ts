@@ -31,6 +31,7 @@ const getList = async (options: Options, noCache: boolean) => {
   const result = await get({
     url,
     noCache,
+    responseType: "json",
     params: {
       _: new Date().getTime(),
     },
